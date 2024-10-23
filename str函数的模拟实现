@@ -1,0 +1,50 @@
+
+int my_strcmp(const char* str1, const char*str2)//使用const是防止字符串被修改，虽然也没有应该人在函数里修改字符串吧
+{
+	assert(str1 && str2);//防止传入的是空指针，一旦传入空指针就会报错
+	while (*str1 == *str2)
+	{
+		if (*str1 == '\0')//这种情况是最后两个字符都到\0了，证明两个字符串是完全相等的
+			return 0;
+		str1++;
+		str2++;
+	}//一直到str1和str2的字符不相等时，则会跳出循环，下面为判断
+	if (*str1 > *str2)
+		return 1;
+	else
+		return -1;
+}
+int main()
+{
+	char arr1[] = "abcdef";
+	char arr2[20] = "abcdefg";
+	int ret = my_strcmp(arr2, arr1);//模拟strcmp的实现，strcmp的作用是比较两个字符串，规则是第一个字符和第一个字符比较，如果arr2的第一个字符的ascii码值>arr1的，则输出>0的数字，如果小于则输出<0的数字，相等的话依次向下类推，如果都相等的话，则输出0
+	printf("%d", ret);
+	return 0;
+}
+
+
+#include<stdio.h>
+#include<string.h>
+#include<assert.h>
+char* my_strcpy( char* dest, const char* sour)
+{
+	assert(sour);//防止传入空指针
+	char* ret = dest;//储存dest的起始地址，后面返回
+	while (*sour!=0)
+	{
+		*dest++ = *sour++;//改变*dest和*sour所指向的字符
+	}
+	*dest = *sour;//拷贝最后的\0
+	return ret;//返回dest的起始地址
+}
+int main()
+{
+	char arr1[] = "xxxxxxxxx";
+	char arr2[] = "abcde";
+	my_strcpy(arr1, arr2);//逗号前为目的地，后为源头，返回值为目标字符串的地址，就是目的地的地址。
+	printf("%s", arr1);
+	return 0;
+}
+
+
